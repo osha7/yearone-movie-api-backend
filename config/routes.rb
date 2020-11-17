@@ -1,3 +1,14 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+ 
+resources :movies
+
+get '/create-or-return-movie', to: "movies#create_or_return_movie"
+post '/create-or-return-movie', to: "movies#create_or_return_movie"
+
+put '/movies/:movie_api_id', to: "movies#update"
+
+root to: 'application#home'
+
+post '/movies/create', to: "movies#create"
+
 end
