@@ -47,13 +47,16 @@ class MoviesController < ApplicationController
     def update
         # byebug
         movie = Movie.find_by(movie_api_id: params["id"])
+        # byebug
         if params["_json"] == "upvote"
-            movie.up_votes + 1
+            movie.up_votes += 1
+            movie.save
             render json: {
                 movie: movie
             }
         elsif params["_json"] == "downvote"
-            movie.up_votes - 1
+            movie.down_votes += 1
+            movie.save
             render json: {
                 movie: movie
             }
@@ -64,7 +67,7 @@ class MoviesController < ApplicationController
                 message: "Unable to Vote At This Time"
             }
         end
-        movie.save
+        
     end
 
     private
